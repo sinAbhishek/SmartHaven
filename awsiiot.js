@@ -66,7 +66,7 @@ app.get("/temperature_humidity", async (req, res) => {
       } else {
         res.send("No temperature and humidity data received");
       }
-    }, 5000);
+    }, 4000);
   } catch (error) {
     res.send("Error requesting temperature and humidity data");
   }
