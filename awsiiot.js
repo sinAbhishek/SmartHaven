@@ -18,7 +18,6 @@ let tempHumidityData = null;
 device.on("connect", function () {
   console.log("Connected to AWS IoT");
 
-  // Subscribe to topics
   device.subscribe("esp8266/control/on");
   device.subscribe("esp8266/control/off");
   device.subscribe("esp8266/temperature_humidity");
@@ -28,7 +27,6 @@ device.on("error", function (error) {
   console.log("Error: ", error);
 });
 
-// Handle incoming messages
 device.on("message", function (topic, payload) {
   console.log("Message received on topic", topic);
   console.log("Payload:", payload.toString());
@@ -60,17 +58,15 @@ app.get("/off", async (req, res) => {
 
 app.get("/temperature_humidity", async (req, res) => {
   try {
-    // Publish a request to the ESP8266 to send the temperature and humidity data
     device.publish("esp8266/request/temperature_humidity", JSON.stringify({}));
 
-    // Wait for the ESP8266 to respond
     setTimeout(() => {
       if (tempHumidityData) {
         res.send(tempHumidityData);
       } else {
         res.send("No temperature and humidity data received");
       }
-    }, 5000); // Wait for 5 seconds
+    }, 5000);
   } catch (error) {
     res.send("Error requesting temperature and humidity data");
   }
