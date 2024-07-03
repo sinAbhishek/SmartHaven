@@ -18,21 +18,21 @@ const char* device_cert = R"EOF(
 
 )EOF";
 
-// Device Private Key
+
 const char* private_key = R"EOF(
 -----BEGIN RSA PRIVATE KEY-----
 
 -----END RSA PRIVATE KEY-----
 )EOF";
 
-// AWS IoT Root CA Certificate
+
 const char* aws_root_ca = R"EOF(
 -----BEGIN CERTIFICATE-----
 
 -----END CERTIFICATE-----
 )EOF";
 
-// MQTT topics
+
 const char* topic_on = "esp8266/control/on";
 const char* topic_off = "esp8266/control/off";
 const char* topic_temp_humid = "esp8266/temperature_humidity";
@@ -52,7 +52,7 @@ void setup() {
     }
     Serial.println(" Connected!");
 
-    // Set up NTP
+  
     configTime(0, 0, "pool.ntp.org", "time.nist.gov");
     Serial.print("Waiting for NTP time sync: ");
     time_t now = time(nullptr);
